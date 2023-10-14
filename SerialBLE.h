@@ -39,9 +39,12 @@ private:
 class SerialBLEClass {
 public:
     void begin(String deviceName="BLE_UART");
+
     void printf(const char* format, ...);
+    void writeString(String msg);
+
     int available();
-    String readLastData();
+    String readString();
     bool isConnected();
 private:
     BLEServer* server = NULL;

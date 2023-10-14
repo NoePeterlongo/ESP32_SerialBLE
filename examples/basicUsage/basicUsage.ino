@@ -9,7 +9,7 @@ void setup() {
 
 void loop() {
     if(SerialBLE.available()) {
-        String receivedString = SerialBLE.readLastData();
+        String receivedString = SerialBLE.readString();
         SerialBLE.printf("I received \"%s\"", receivedString.c_str());
     }
 }

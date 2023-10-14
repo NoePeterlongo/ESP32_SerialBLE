@@ -30,23 +30,24 @@ bool SerialBLEClass::isConnected() {
 }
 
 void SerialBLEClass::printf(const char* format, ...) {
-    char buffer[100];
+    char buffer[200];
     va_list args;
     va_start(args, format);
     int nChar = std::vsprintf(buffer, format, args);
     va_end(args);
     txCharacteristic->setValue(buffer);
     txCharacteristic->notify();
-    // for(int i = 0; i < nChar; i++) {
-    //     Serial.printf("%d\t", (int)buffer[i]);
-    // }
-    // Serial.println();
+}
+
+void SerialBLEClass::writeString(String msg) {
+    txCharacteristic->setValue(msg.c_str());
+    txCharacteristic->notify();
 }
 
 int SerialBLEClass::available() {
     return rxCallbacks->available();
 }
 
-String SerialBLEClass::readLastData() {
+String SerialBLEClass::readString() {
     return rxCallbacks->getLastData();
 }
